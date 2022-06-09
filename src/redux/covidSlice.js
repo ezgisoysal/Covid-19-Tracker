@@ -25,7 +25,11 @@ export const covidSlice = createSlice({
     },
     country: "",
   },
-  reducers: {},
+  reducers: {
+    setCountry: (state, action) => {
+      state.country = action.payload;
+    }
+  },
   extraReducers: {
     [getData.fulfilled]: (state, action) => {
       state.items.confirmed = action.payload.confirmed.value;
@@ -38,4 +42,5 @@ export const covidSlice = createSlice({
   },
 });
 
+export const { setCountry } = covidSlice.actions;
 export default covidSlice.reducer;

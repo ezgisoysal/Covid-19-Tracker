@@ -26,6 +26,7 @@ ChartJS.register(
 
 function Chart () {
   const items = useSelector((state) => state.covid.items);
+  const country = useSelector((state) => state.covid.country);
 
   //CHART LİNE
   const [dailyData, setDailyData] = useState([]);
@@ -118,12 +119,7 @@ function Chart () {
 
   return (
     <div className={styles.container}>
-      <Bar configbar={configbar} data={dataBar} />
-      <br />
-      <hr />
-      <br />
-      <h1>GLOBAL:</h1>
-      <Line config={config} data={dataLine}/>
+      {country !== "Global" ? <Bar configbar={configbar} data={dataBar} /> : <Line config={config} data={dataLine} />}
     </div>
   );
 };

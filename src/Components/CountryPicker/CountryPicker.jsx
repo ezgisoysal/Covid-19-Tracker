@@ -3,7 +3,7 @@ import { NativeSelect, FormControl } from "@mui/material";
 import styles from "./CountryPicker.module.css";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
-import { getData } from "../../redux/covidSlice";
+import { getData, setCountry } from "../../redux/covidSlice";
 
 function CountryPicker () {
   const [fetchedCountries, setFetchedCountries] = useState([]);
@@ -22,7 +22,9 @@ function CountryPicker () {
   }, [fetchedCountries]);
 
   useEffect(() => {
+    console.log(selectedCountry);
     dispatch(getData(selectedCountry));
+    dispatch(setCountry(selectedCountry));
   }, [selectedCountry]);
 
   const handleCountryChange = (e) => {
@@ -36,7 +38,7 @@ function CountryPicker () {
         defaultValue=""
         onChange={handleCountryChange}
       >
-        <option value="">Global</option>
+        <option value="Global">Global</option>
         {fetchedCountries.map((country, key) => (
           <option key={key} value={country.name}>
             {country.name}
